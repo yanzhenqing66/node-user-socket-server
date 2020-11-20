@@ -17,9 +17,8 @@ let userSchema = new Schema({
     type: String,
     required: true
   },
-  type: {
-    type: String,
-    unique: true
+  user_type: {
+    type: String
   },
   header: { // 头像名称
     type: String
@@ -48,4 +47,4 @@ let userSchema = new Schema({
 
 // 生成数据模模型，可以进行增删改查操作
 // 第一个参数数据库名称，第二个参数约束对象的实例
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('users', userSchema)

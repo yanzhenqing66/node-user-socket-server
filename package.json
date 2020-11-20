@@ -1,7 +1,18 @@
 {
   "dependencies": {
     "blueimp-md5": "^2.18.0",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "mongoose": "^5.10.13"
-  }
+    "mongoose": "^5.10.13",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "start": "nodemon ./server"
+  },
+  "name": "boss-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/yanzhenqing66/boss-direct-server.git",
+  "author": "yanzhenqing66 <504767693@qq.com>",
+  "license": "MIT"
 }

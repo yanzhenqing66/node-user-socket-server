@@ -3,6 +3,7 @@
 // 引入mongoose
 let mongoose = require('mongoose')
 mongoose.set('useCreateIndex', true)
+mongoose.set('useFindAndModify', false)
 
 // 定义数据库名
 const DB_NAME = 'boss_direct'
