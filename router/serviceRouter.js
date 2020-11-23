@@ -7,7 +7,7 @@ const userModel = require('../model/userModel')
 
 let router = Router()
 
-// const filter = {password: 0, __v: 0, enable_flag: 0}
+const filter = {password: 0, __v: 0, enable_flag: 0}
 
 // 登录
 router.post('/login', async (request, response) => {
@@ -24,7 +24,7 @@ router.post('/login', async (request, response) => {
     return
   }
   try {
-    let findRes = await userModel.findOne({ username, password: md5(password) })
+    let findRes = await userModel.findOne({ username, password: md5(password) }, filter)
     if (findRes) {
       const {_id} = findRes
       response.cookie('token', _id, {maxAge: 1000*60*60*24})
@@ -86,7 +86,7 @@ router.post('/userUpdate', async (request, response) => {
     return response.send({ code: 1, msg: '请选择头像' })
   }
   try {
-    userModel.findByIdAndUpdate({ _id: token }, request.body, (err, oldUser) => {
+    userModel.findByIdAndUpdate({ _id: token }, request.body, filter, (err, oldUser) => {
       const {username, user_type, _id} = oldUser
       if(!oldUser) {
         response.clearCookie('token')
@@ -98,6 +98,23 @@ router.post('/userUpdate', async (request, response) => {
     })
   } catch (error) {
     response.send({ code: 1, msg: '网络不稳定，请稍后重试' })
+  }
+})
+
+// 获取用户信息
+router.get('/user', async (request, response) => {
+  const token = request.cookies.token
+  if(!token) {
+    return response.send({code: 1, msg: '请先登录'})
+  }
+  try {
+    const findRes = await userModel.findOne({_id: token}, filter)
+    if(findRes) {
+      response.send({code: 0, data: findRes})
+    }
+  } catch (error) {
+    console.log(error)
+    response.send({code: 0, msg: '网络不稳定，请重新登录'})
   }
 })
 
