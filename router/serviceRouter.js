@@ -1,6 +1,6 @@
 // 服务路由
 
-const { Router, response } = require('express')
+const { Router, response, request } = require('express')
 const md5 = require('blueimp-md5')
 
 const userModel = require('../model/userModel')
@@ -115,6 +115,20 @@ router.get('/user', async (request, response) => {
   } catch (error) {
     console.log(error)
     response.send({code: 0, msg: '网络不稳定，请重新登录'})
+  }
+})
+
+// 根据类型，获取用户列表
+router.get('/userlist', async (request, response) => {
+  const {user_type} = response.query
+  try {
+    const findRes = await userModel.find({user_type}, filter)
+    if(findRes) {
+      response.send({code: 0, data: findRes})
+    }
+  } catch (error) {
+    console.log(error)
+    response.send({code: 1, msg: error})
   }
 })
 
