@@ -120,7 +120,7 @@ router.get('/user', async (request, response) => {
 
 // 根据类型，获取用户列表
 router.get('/userlist', async (request, response) => {
-  const {user_type} = response.query
+  const {user_type} = request.query
   try {
     const findRes = await userModel.find({user_type}, filter)
     if(findRes) {
