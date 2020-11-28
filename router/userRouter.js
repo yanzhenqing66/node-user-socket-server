@@ -1,6 +1,6 @@
-// 服务路由
+// 用户服务路由
 
-const { Router, response, request } = require('express')
+const { Router } = require('express')
 const md5 = require('blueimp-md5')
 
 const userModel = require('../model/userModel')

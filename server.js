@@ -2,8 +2,10 @@
 const express = require('express')
 
 const db = require('./db')
-const serviceRouter = require('./router/serviceRouter')
 const cookieParser = require('cookie-parser')
+
+const userRouter = require('./router/userRouter')
+const chatRouter = require('./router/chatRouter')
 
 // 创建app服务对象
 let app = express()
@@ -14,7 +16,9 @@ db.then(() => {
   app.use(express.urlencoded({ extended: true }))
   app.use(cookieParser())
   app.use(express.json({limit: '5mb'}))
-  app.use(serviceRouter)
+  app.use(userRouter)
+  app.use(chatRouter)
+
 }).catch(err => {
   console.log(err)
 })
