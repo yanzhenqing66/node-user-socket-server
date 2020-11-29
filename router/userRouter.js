@@ -62,7 +62,7 @@ router.post('/register', async (request, response) => {
       response.send({ code: 1, msg: '用户已经被注册' })
       return
     } else {
-      let createRes = await userModel.create({ username, user_type, password: md5('123456') })
+      let createRes = await userModel.create({ username, user_type, password: md5(password) })
       if (createRes) {
         const {_id} = createRes
         response.cookie('token', _id, {maxAge: 1000*60*60*24})

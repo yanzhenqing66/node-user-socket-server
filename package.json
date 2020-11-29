@@ -4,7 +4,8 @@
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "mongoose": "^5.10.13",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "socket.io": "^3.0.3"
   },
   "scripts": {
     "start": "nodemon ./server"
