@@ -26,7 +26,7 @@ const chatSchema = new Schema({
     default: false
   },
   create_time: {
-    type: Date,
+    type: Number,
     default: Date.now()
   },
   enable_flag: {
