@@ -1,6 +1,7 @@
 // 引入 express 框架
 const express = require('express')
 const http = require('http')
+// const cors = require('cors')
 
 const db = require('./db')
 const cookieParser = require('cookie-parser')
@@ -10,12 +11,13 @@ const chatRouter = require('./router/chatRouter')
 
 // 创建app服务对象
 let app = express()
+// app.use(cors())
 let server = http.Server(app)
 require('./socketIO/index')(server)
 
 db.then(() => {
   // 中间件
-  app.use(express.static('public'))
+  // app.use(express.static('public'))
   app.use(express.urlencoded({ extended: true }))
   app.use(cookieParser())
   app.use(express.json({limit: '5mb'}))

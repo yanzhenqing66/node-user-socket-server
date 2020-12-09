@@ -22,7 +22,7 @@ const chatSchema = new Schema({
     required: true
   },
   read: {
-    type: String,
+    type: Boolean,
     default: false
   },
   create_time: {

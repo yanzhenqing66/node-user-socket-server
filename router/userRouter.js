@@ -11,6 +11,7 @@ const filter = {password: 0, __v: 0, enable_flag: 0}
 
 // 登录
 router.post('/login', async (request, response) => {
+  // response.set('Access-Control-Allow-Origin', '*')
   // 获取用户输入
   let { username, password } = request.body
   // 校验
@@ -39,6 +40,7 @@ router.post('/login', async (request, response) => {
 
 // 注册
 router.post('/register', async (request, response) => {
+  // response.set('Access-Control-Allow-Origin', '*')
   // 获取用户输入
   const { username, password, password2, user_type } = request.body
   // 校验
@@ -77,6 +79,7 @@ router.post('/register', async (request, response) => {
 
 // 更新用户信息
 router.post('/userUpdate', async (request, response) => {
+  // response.set('Access-Control-Allow-Origin', '*')
   let token = request.cookies.token
   if(!token) {
     return response.send({code: 1, msg: '请先登录'})
@@ -103,6 +106,7 @@ router.post('/userUpdate', async (request, response) => {
 
 // 获取用户信息
 router.get('/user', async (request, response) => {
+  // response.set('Access-Control-Allow-Origin', '*')
   const token = request.cookies.token
   if(!token) {
     return response.send({code: 1, msg: '请先登录'})
@@ -114,12 +118,13 @@ router.get('/user', async (request, response) => {
     }
   } catch (error) {
     console.log(error)
-    response.send({code: 0, msg: '网络不稳定，请重新登录'})
+    response.send({code: 1, msg: error})
   }
 })
 
 // 根据类型，获取用户列表
 router.get('/userlist', async (request, response) => {
+  // response.set('Access-Control-Allow-Origin', '*')
   const {user_type} = request.query
   try {
     const findRes = await userModel.find({user_type}, filter)

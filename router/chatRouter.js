@@ -11,6 +11,7 @@ const filter = { enable_flag: 0, __v: 0, password: 0 }
 
 // 获取当前用户所有聊天消息
 router.get('/msglist', async (req, res) => {
+  // res.set('Access-Control-Allow-Origin', '*')
   const token = req.cookies.token
   try {
     let findRes = await userModel.find()
@@ -32,10 +33,11 @@ router.get('/msglist', async (req, res) => {
 
 // 修改未读消息为已读
 router.post('/updread', async (req, res) => {
-  const from_id = req.body.from_id
+  // res.set('Access-Control-Allow-Origin', '*')
+  const {from_id} = req.body
   const to_id = req.cookies.token
   try {
-    chatModel.update({ from_id, to_id, read: false }, { read: true }, { multi: true }, (err, doc) => {
+    chatModel.updateMany({ from_id, to_id, read: false }, { read: true }, { multi: true }, (err, doc) => {
       if (!err) res.send({ code: 0, data: doc.nModified })  // 返回更新的数量
     })
   } catch (error) {
